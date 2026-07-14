@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign In - AI Librarian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen font-sans">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold text-gray-900">📚 AI Librarian</h1>
+            <p class="text-gray-500 mt-2">Sign in to access your recommendations</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="mb-4 p-3 rounded text-sm {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" name="email" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 outline-none">
+            </div>
+            <div>
+                <div class="flex justify-between items-center">
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <a href="{{ url_for('forgot_password') }}" class="text-xs text-purple-600 hover:underline">Forgot password?</a>
+                </div>
+                <input type="password" name="password" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 outline-none">
+            </div>
+            
+            <div class="flex gap-4 pt-2">
+                <button type="submit" name="action" value="login" class="w-full bg-purple-600 text-white font-bold py-3 rounded-xl hover:bg-purple-700 transition shadow-md">Sign In</button>
+                <button type="submit" name="action" value="register" class="w-full bg-gray-100 text-gray-800 font-bold py-3 rounded-xl hover:bg-gray-200 transition">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
